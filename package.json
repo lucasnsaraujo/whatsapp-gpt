@@ -1,0 +1,14 @@
+{
+  "name": "whatsapp-gpt",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^5.2.0",
+    "chatgpt": "^5.2.2",
+    "libgen": "^2.1.2",
+    "progress": "^2.0.3",
+    "whatsapp-web.js": "^1.19.5"
+  }
+}
