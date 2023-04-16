@@ -3,8 +3,10 @@ import dotenv from 'dotenv'
 dotenv.config();
 
 import { askChatGPT, generateImage } from './services/open-ai.js'
-import { Client } from 'whatsapp-web.js';
+import whatsappJs from 'whatsapp-web.js';
 import qrcode from 'qrcode-terminal';
+
+const { Client, MessageMedia } = whatsappJs;
 
 const client = new Client();
 
@@ -29,11 +31,18 @@ client.on('message', async (msg) => {
         const reply = await askChatGPT(msg.body);
         msg.reply(reply);
     } else if (requestType.ask_gpt_4) {
+        console.log('> (ask-gpt-4) action received')
         const reply = await askChatGPT(msg.body, {model: 'gpt-4'})
+        console.log(reply && `> Reply received. Sending now...`)
         msg.reply(reply)
     } else if (requestType.generate_image) {
-        const reply = await generateImage(msg.body);
-        msg.reply(reply)
+        const imageUrl = await generateImage(msg.body);
+        if (imageUrl === null) {
+            msg.reply('Ocorreu um erro ao gerar a imagem. Tente novamente com outro prompt.')
+        }
+        console.log('image url = ', imageUrl)
+        const media = await MessageMedia.fromUrl(imageUrl)
+        msg.reply(media)
     }
     
 });

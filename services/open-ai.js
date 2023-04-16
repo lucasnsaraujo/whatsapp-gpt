@@ -17,9 +17,9 @@ export async function generateImage(prompt = '', options = {
     const response = await openai.createImage({
         prompt,
         size: options.size,
-    })
+    }).catch(error => null)
     console.log(response.data)
-    return response.data.url
+    return response?.data?.data?.[0]?.url ?? response.data
 }
 
 export async function askChatGPT(prompt = '', options = {
