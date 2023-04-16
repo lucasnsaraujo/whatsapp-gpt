@@ -8,7 +8,11 @@ import qrcode from 'qrcode-terminal';
 
 const { Client, MessageMedia } = whatsappJs;
 
-const client = new Client();
+const client = new Client({
+    puppeteer: {
+        args: ['--no-sandbox']
+    }
+});
 
 client.on('qr', (qr) => {
     // rendering qr code on terminal
