@@ -12,6 +12,7 @@ const client = new Client();
 
 client.on('qr', (qr) => {
     // rendering qr code on terminal
+    console.log(`> QR Code generated: ${qr}`)
     qrcode.generate(qr)
 });
 
