@@ -19,6 +19,12 @@ client.on('ready', () => {
     console.log('Client is ready!');
 });
 
+const MENU_MESSAGE = `
+    /gpt - Ask ChatGPT
+    /gpt4 - Ask ChatGPT v4
+    /img - Generate image
+`
+
 // asking chat gpt
 client.on('message', async (msg) => {
     const firstParameter = msg.body.split(' ')?.[0]
@@ -43,6 +49,8 @@ client.on('message', async (msg) => {
         console.log('image url = ', imageUrl)
         const media = await MessageMedia.fromUrl(imageUrl)
         msg.reply(media)
+    } else if (msg.body.includes('menu')) {
+        msg.reply(MENU_MESSAGE)
     }
     
 });
