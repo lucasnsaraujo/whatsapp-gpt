@@ -50,6 +50,7 @@ client.on('message', async (msg) => {
         const imageUrl = await generateImage(msg.body);
         if (imageUrl === null) {
             msg.reply('Ocorreu um erro ao gerar a imagem. Tente novamente com outro prompt.')
+            return;
         }
         console.log('image url = ', imageUrl)
         const media = await MessageMedia.fromUrl(imageUrl)

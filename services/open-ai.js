@@ -18,7 +18,7 @@ export async function generateImage(prompt = '', options = {
         prompt,
         size: options.size,
     }).catch(error => null)
-    return response?.data?.data?.[0]?.url ?? response
+    return response ? response?.data?.data?.[0]?.url : response
 }
 
 export async function askChatGPT(prompt = '', options = {
